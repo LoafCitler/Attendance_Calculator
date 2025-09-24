@@ -15,13 +15,34 @@
         }
 
         label {
-            font-size: 17px;
+            font-size: 20px;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
 
+        .inp{
+            font-size: 19px;
+            width: 200px;
+            border-radius: 5px;
+            background-color: rgb(240, 111, 111);
+        }
+        .inp:hover{
+            background-color: rgb(207, 66, 66);
+        }
+
         p {
-            font-size: 17px;
+            font-size: 20px;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+        }
+
+        .b{
+            font-size: 20px;
+            border-radius: 10px;
+            border: 3px solid ;
+            background-color: rgb(240, 111, 111);
+        }
+
+        .b:hover{
+            background-color: rgb(207, 66, 66);
         }
 
         .box {
@@ -39,14 +60,14 @@
 <body>
     <h1>Attendance Calculator</h1>
     <div class="box">
-        <label>Total Number of lectures:-</label>
-        <input type="number" id="totalattendance" action="">
-        <br><br>
         <label>Number of lectures attended:-</label>
-        <input type="number" id="attended" action="">
+        <input class="inp" type="number" id="attended" action="">
+        <br><br>
+        <label>Total Number of lectures:-</label>
+        <input class="inp" type="number" id="totalattendance" action="">
         <br><br>
         <label>Required Percentage:-</label>
-        <select id='rp'>
+        <select class="inp" id='rp' >
             <option value="0">Select</option>
             <option value="75">75%</option>
             <option value="80">80%</option>
@@ -59,6 +80,7 @@
         <button onclick="display()" class="b">Submit</button>
         <p id="out1"></p>
         <p id="out2"></p>
+        <p id="out3"></p>
     </div>
     <script>
         function display()
@@ -74,9 +96,12 @@
             }
             else
             {
-                document.getElementById('out1').innerHTML='Your current Attendance Percentage is:- '+pr;
+                document.getElementById('out1').innerHTML='Your current Attendance Percentage is:- '+Math.trunc(pr);
                 if (pr>=rp){
                     document.getElementById('out2').innerHTML='You meet the required attendance';
+                    ml=(la*100)/rp-ta;
+                    document.getElementById('out3').innerHTML='You can miss '+ Math.trunc(ml) ;
+
 
                 }
                 else{
