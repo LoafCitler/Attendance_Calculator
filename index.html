@@ -23,10 +23,10 @@
             font-size: 19px;
             width: 200px;
             border-radius: 5px;
-            background-color: rgb(240, 111, 111);
+            background-color: rgb(255, 137, 69);
         }
         .inp:hover{
-            background-color: rgb(207, 66, 66);
+            background-color: rgb(216, 102, 36);
         }
 
         p {
@@ -39,17 +39,17 @@
             font-size: 20px;
             border-radius: 10px;
             border: 3px solid ;
-            background-color: rgb(240, 111, 111);
+            background-color: rgb(255, 137, 69);
         }
 
         .b:hover{
-            background-color: rgb(207, 66, 66);
+            background-color: rgb(216, 102, 36);
         }
 
-        .box {
+        .box{
             background-color: rgb(22, 185, 85);
             border: 8px solid black;
-            width: 550px;
+            width: 30%;
             height: auto;
             padding: 15px;
             border-radius: 15px;
@@ -100,8 +100,11 @@
                 document.getElementById('out1').innerHTML='Your current Attendance Percentage is:- '+Math.trunc(pr);
                 if (pr>=rp){
                     document.getElementById('out2').innerHTML='You meet the required attendance';
+                    document.getElementById('out3').innerHTML='';
                     ml=(la*100)/rp-ta;
-                    document.getElementById('out3').innerHTML='You can miss '+ Math.trunc(ml) ;
+                    if(pr>rp){
+                        document.getElementById('out3').innerHTML='You can miss '+ Math.trunc(ml) +' lectures to keep the '+ rp +'%';
+                    }
 
 
                 }
