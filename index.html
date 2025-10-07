@@ -6,59 +6,94 @@
     <title>Attendance Calculator</title>
     <style>
         body {
-            text-align: center;
-            background-color: rgb(0, 189, 214);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgb(65, 64, 64);
+            flex-wrap: wrap;
         }
 
         h1 {
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+            background-image: linear-gradient(to bottom right,rgb(59, 201, 59),rgb(0, 255, 255));
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: transparent;
+            background-clip: text;
         }
 
         label {
             font-size: 20px;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
 
         .inp{
             font-size: 19px;
+            margin: 10px;
             width: 200px;
             border-radius: 5px;
-            background-color: rgb(255, 137, 69);
+            background-color: transparent;
             border: 2px solid;
-            transition: 150ms ease-in;
-        }
+            transition: 120ms ease-in;
+            font-weight: 450;
+        }   
         .inp:hover{
-            background-color: rgb(216, 102, 36);
+            scale: 1.05;
+            box-shadow:4px 4px black ;
         }
 
         p {
-            font-size: 20px;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            color: rgb(255, 224, 186);
+            font-size: 19px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: rgb(252, 227, 197);
+            font-weight: 450;
         }
 
         .b{
             font-size: 20px;
             border-radius: 10px;
+            margin: 10px;
             border: 3px solid ;
-            background-color: rgb(255, 137, 69);
-            transition: 150ms ease-in;
+            background-color: transparent;
+            transition: 120ms ease-in-out;
+            font-weight: 450;
         }
 
         .b:hover{
-            background-color: rgb(216, 102, 36);
+            scale: 1.05;
+            box-shadow:4px 4px black ;
         }
 
         .box{
-            background-color: rgb(22, 185, 85);
-            border: 8px solid black;
-            width: 500px;
-            min-width: 250px;
-            height: auto;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            background-image: linear-gradient(to bottom right,rgb(59, 201, 59),rgb(52, 214, 214));
+            border: 5px solid black;
+            max-width: fit-content;
+            max-height: 60vh;
             padding: 15px;
             border-radius: 15px;
-            margin-left: auto;
-            margin-right: auto;
+            transition: 175ms ease-in-out;
+        }
+
+        .box:hover{
+            scale: 1.05;
+            box-shadow:5px 5px black ;
+        }
+
+        .inp1{
+            font-size: 19px;
+            margin: 10px;
+            width: 200px;
+            border-radius: 5px;
+            background-color: rgb(60, 204, 115);
+            border: 2px solid;
+            transition: 120ms ease-in;
+        }   
+        .inp1:hover{
+            scale: 1.05;
+            box-shadow:4px 4px black ;
         }
     </style>
 </head>
@@ -67,12 +102,10 @@
     <div class="box">
         <label>Total Number of lectures:-</label>
         <input class="inp" type="number" id="totalattendance" action="">
-        <br><br>
         <label>Number of lectures attended:-</label>
         <input class="inp" type="number" id="attended" action="">
-        <br><br>
         <label>Required Percentage:-</label>
-        <select class="inp" id='rp' >
+        <select class="inp1" id='rp' >
             <option value="0">Select</option>
             <option value="75">75%</option>
             <option value="80">80%</option>
@@ -81,11 +114,9 @@
             <option value="95">95%</option>
             <option value="99">99%</option>
         </select>
-        <br><br>
         <button onclick="display()" class="b">Submit</button>
         <p id="out1"></p>
         <p id="out2"></p>
-        <p id="out3"></p>
     </div>
     <script>
         function display()
@@ -101,13 +132,11 @@
             }
             else
             {
-                document.getElementById('out1').innerHTML='Your current Attendance Percentage is:- '+Math.trunc(pr);
+                document.getElementById('out1').innerHTML='Your Attendance Percentage is:- '+Math.trunc(pr);
                 if (pr>=rp){
-                    document.getElementById('out2').innerHTML='You meet the required attendance';
-                    document.getElementById('out3').innerHTML='';
                     ml=(la*100)/rp-ta;
                     if(pr>rp){
-                        document.getElementById('out3').innerHTML='You can miss '+ Math.trunc(ml) +' lectures to keep the '+ rp +'%';
+                        document.getElementById('out2').innerHTML='You can bunk '+ Math.trunc(ml)+' lectures.';
                     }
 
 
@@ -116,8 +145,7 @@
                     var am=(ta*rp-100*la)/(100-rp);
                     var a= (ta+am);
                     var b= (la+am);
-                    document.getElementById('out2').innerHTML='You have to attend '+am+' more lectures.<br><br>With your Total Lectures beign :- '+a+'<br><br>'+'And attended lectures beign :- '+b;
-                    document.getElementById('out3').innerHTML='';
+                    document.getElementById('out2').innerHTML='You have to attend '+am+' more lectures.';
                     
                 }
             }
