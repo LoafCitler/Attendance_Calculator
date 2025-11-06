@@ -14,13 +14,15 @@
         }
 
         h1 {
+            font-size: 35px;
             background-image: linear-gradient(to bottom right,rgb(59, 201, 59),rgb(0, 255, 255));
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             color: transparent;
             padding: 4px;
+            margin-bottom: 40px;
             border-radius: 8px;
             background-clip: text;
-            transition: 150ms ease-in-out;
+            transition: 170ms ease-in-out;
         }
         h1:hover{
             color: black;
@@ -53,7 +55,7 @@
         p {
             font-size: 19px;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            color: rgb(252, 227, 197);
+            color: rgb(145, 14, 210);
             font-weight: 450;
         }
 
@@ -63,7 +65,7 @@
             margin: 10px;
             border: 3px solid ;
             background-color: transparent;
-            transition: 120ms ease-in-out;
+            transition: 150ms ease-in-out;
             font-weight: 450;
         }
 
@@ -84,38 +86,32 @@
             max-height: 60vh;
             padding: 15px;
             border-radius: 15px;
-            transition: 175ms ease-in-out;
+            transition: 200ms ease-in-out;
         }
 
         .box:hover{
-            scale: 1.05;
-            box-shadow:5px 5px black ;
+            scale: 1.02;
+            border:transparent;
+            box-shadow:-10px -10px 70px rgb(59, 201, 59), 10px 10px 70px rgb(52, 214, 214);
         }
 
-        .inp1{
-            font-size: 19px;
-            margin: 10px;
-            width: 200px;
-            border-radius: 5px;
-            background-color: rgb(60, 204, 115);
-            border: 2px solid;
-            transition: 120ms ease-in;
-        }   
-        .inp1:hover{
-            scale: 1.05;
-            box-shadow:4px 4px black ;
+        .headbutt{
+            background:none;
+            border: none;
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
 <body>
-    <h1>Attendance Calculator</h1>
-    <div class="box">
+    <button class="headbutt appearance" onclick="appearance()" ><h1>Attendance Calculator</h1></button>
+    <div class="box appearance">
         <label>Total Number of lectures:-</label>
         <input class="inp" type="number" id="totalattendance" action="">
         <label>Number of lectures attended:-</label>
         <input class="inp" type="number" id="attended" action="">
         <label>Required Percentage:-</label>
-        <select class="inp1" id='rp' >
+        <select class="inp" id='rp' >
             <option value="0">Select</option>
             <option value="75">75%</option>
             <option value="80">80%</option>
@@ -129,8 +125,7 @@
         <p id="out2"></p>
     </div>
     <script>
-        function display()
-        {
+        function display(){
             var ta = parseInt(document.getElementById("totalattendance").value) ;
             var la = parseInt(document.getElementById("attended").value);
             var rp = parseInt(document.getElementById("rp").value);
@@ -159,7 +154,15 @@
                     
                 }
             }
-        } 
+        }
+
+        function appearance(){
+            const background = document.querySelectorAll('appearance');
+            var x = 0;
+            if(x==0){
+                background.getElementById()
+            }
+        }
     </script>
 </body>
 </html>
