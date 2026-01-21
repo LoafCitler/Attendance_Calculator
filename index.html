@@ -3,8 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Attendance Calculator</title>
     <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Montserrat", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
+        }
+
         body {
             display: flex;
             flex-direction: column;
@@ -16,7 +29,6 @@
         h1 {
             font-size: 35px;
             background-image: linear-gradient(to bottom right,rgb(59, 201, 59),rgb(0, 255, 255));
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             color: transparent;
             padding: 4px;
             margin-bottom: 40px;
@@ -34,7 +46,6 @@
 
         label {
             font-size: 20px;
-            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
 
         .inp{
@@ -42,24 +53,27 @@
             margin: 10px;
             width: 200px;
             border-radius: 5px;
-            background-color: transparent;
+            background: transparent;
             border: 2px solid;
             transition: 120ms ease-in;
             font-weight: 450;
         }   
+        .sel option{
+            background: gray;
+            border-radius: 10px;
+        }
         .inp:hover{
             scale: 1.05;
-            box-shadow:4px 4px black ;
+            box-shadow:0px 0px 5px black,0px 0px 5px black ;
         }
 
         p {
             font-size: 19px;
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            color: rgb(145, 14, 210);
+            color: rgb(255, 255, 255);
             font-weight: 450;
         }
 
-        .b{
+        .submit{
             font-size: 20px;
             border-radius: 10px;
             margin: 10px;
@@ -69,9 +83,9 @@
             font-weight: 450;
         }
 
-        .b:hover{
+        .submit:hover{
             scale: 1.05;
-            box-shadow:4px 4px black ;
+            box-shadow:0px 0px 5px black,0px 0px 5px black ;
         }
 
         .box{
@@ -86,33 +100,25 @@
             max-height: 60vh;
             padding: 15px;
             border-radius: 15px;
-            transition: 200ms ease-in-out;
         }
+        
 
-        .box:hover{
-            scale: 1.02;
-            border:transparent;
-            box-shadow:-10px -10px 70px rgb(59, 201, 59), 10px 10px 70px rgb(52, 214, 214);
-        }
-
-        .headbutt{
-            background:none;
-            border: none;
-            margin: 0;
-            padding: 0;
-        }
     </style>
 </head>
 <body>
-    <button class="headbutt appearance" onclick="appearance()" ><h1>Attendance Calculator</h1></button>
+    <h1>Attendance Calculator</h1>
+
     <div class="box appearance">
+
         <label>Total Number of lectures:-</label>
-        <input class="inp" type="number" id="totalattendance" action="">
+        <input class="inp" type="number" id="totalAttendance" action="">
+
         <label>Number of lectures attended:-</label>
-        <input class="inp" type="number" id="attended" action="">
+        <input class="inp" type="number" id="lecturesAttended" action="">
+
         <label>Required Percentage:-</label>
-        <select class="inp" id='rp' >
-            <option value="0">Select</option>
+        <select class="inp sel" id='requiredPercentage' >
+            <option disabled selected>Select</option>
             <option value="75">75%</option>
             <option value="80">80%</option>
             <option value="85">85%</option>
@@ -120,47 +126,39 @@
             <option value="95">95%</option>
             <option value="99">99%</option>
         </select>
-        <button onclick="display()" class="b">Submit</button>
+
+        <button onclick="display()" class="submit">Submit</button>
+
         <p id="out1"></p>
         <p id="out2"></p>
+
     </div>
+
     <script>
         function display(){
-            var ta = parseInt(document.getElementById("totalattendance").value) ;
-            var la = parseInt(document.getElementById("attended").value);
-            var rp = parseInt(document.getElementById("rp").value);
-            var pr = la/ta*100;
-            if (ta==null || la==null || rp==0)
-            {
+            let totalAttendance = parseInt(document.getElementById("totalAttendance").value) ;
+            let lecturesAttended = parseInt(document.getElementById("lecturesAttended").value);
+            let requiredPercentage = parseInt(document.getElementById("requiredPercentage").value);
+
+            let calculatedPercentage = lecturesAttended/totalAttendance*100;
+
+            if (totalAttendance==null || lecturesAttended==null || requiredPercentage==0){
                 document.getElementById('out1').innerHTML='Please enter all the values!';
                 document.getElementById('out2').innerHTML='';
             }
-            else
-            {
-                document.getElementById('out1').innerHTML='Your Attendance Percentage is:- '+Math.trunc(pr)+'%';
-                if (pr>=rp){
-                    ml=(la*100)/rp-ta;
-                    if(pr>rp){
-                        document.getElementById('out2').innerHTML='You can bunk '+ Math.trunc(ml)+' lectures.';
-                    }
 
+            else{
+                document.getElementById('out1').innerHTML='Your Attendance Percentage is:- '+Math.trunc(calculatedPercentage)+'%';
 
+                if (calculatedPercentage>=requiredPercentage){
+                    bunkLectures=(lecturesAttended*100)/requiredPercentage-totalAttendance;
+                    document.getElementById('out2').innerHTML='You can bunk '+ Math.trunc(bunkLectures)+' lectures.';
                 }
+
                 else{
-                    var am=(ta*rp-100*la)/(100-rp);
-                    var a= (ta+am);
-                    var b= (la+am);
-                    document.getElementById('out2').innerHTML='You have to attend '+am+' more lectures.';
-                    
+                    let attendLectures=(totalAttendance*requiredPercentage-100*lecturesAttended)/(100-requiredPercentage);
+                    document.getElementById('out2').innerHTML='You have to attend '+attendLectures+' more lectures.';
                 }
-            }
-        }
-
-        function appearance(){
-            const background = document.querySelectorAll('appearance');
-            var x = 0;
-            if(x==0){
-                background.getElementById()
             }
         }
     </script>
